@@ -11,10 +11,15 @@ pygame.display.set_caption('Runner')
 clock = pygame.time.Clock()
 font = pygame.font.Font('font/Pixeltype.ttf', 50)
 
-# fling animation
+# fling animation (snail)
 snail_vel_x = 0
 snail_vel_y = 0
 snail_hit = False
+
+# # fling animation (hit)
+# hit_surface_x = 0
+# hit_surface_y = 0
+# hit_surface_x = False
 
 show_hit_timer = 0
 
@@ -29,7 +34,6 @@ player_surf = pygame.image.load('graphics/player_walk_1.png').convert_alpha()
 player_rect = player_surf.get_rect(midbottom = (80, 300)) 
 
 hit_surface = font.render('HIT!', False, 'Red')
-
 
 
 while True:
@@ -49,7 +53,6 @@ while True:
 
     if player_rect.right < 0:
         player_rect.left = 800
-    player_rect.left += 1
     screen.blit(player_surf, player_rect)
 
     #initial fling
@@ -71,6 +74,11 @@ while True:
         snail_rect.x -= 4
         if snail_rect.x < -100:
             snail_rect.x = 800
+
+
+    mouse_pos = pygame.mouse.get_pos()
+    if player_rect.collidepoint(mouse_pos):
+        print ("collision")
 
     
 
